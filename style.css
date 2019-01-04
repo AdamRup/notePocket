@@ -1,0 +1,74 @@
+body{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+#layout{
+    width: 700px;
+    height: 1000px;
+    background: wheat;
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+}
+#menu{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    width: 100%;
+    height: 75px;
+    background: orange;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#menu a button{
+    height: 37px;
+    width: 75px;
+    margin-left: 15px;
+    border-radius: 10px;
+    background: darkgray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+#menu button{
+    height: 37px;
+    width: 75px;
+    margin-left: 15px;
+    border-radius: 10px;
+    background: darkgray;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+#menu a button:hover{
+    background: gray;
+    transition: 0.3s;
+}
+#menu button:hover{
+    background: gray;
+    transition: 0.3s;
+}
+#noteSorage-layout{
+    display: flex;
+    background: whitesmoke;
+    height:905px;
+    width: 690px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+}
+#noteStorage{
+    padding: 10px 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#noteLayout{
+    display: flex;
+    flex-direction: column;
+    height:905px;
+    padding: 5px 5px 5px 5px;
+}
+#noteTitle{
+    margin-bottom: 5px;
+}
+#note{
+    height: 100%;
+}
+
