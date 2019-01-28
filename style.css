@@ -48,6 +48,7 @@ body{
 }
 #noteSorage-layout{
     display: flex;
+    flex-direction: column;
     background: whitesmoke;
     height:905px;
     width: 690px;
