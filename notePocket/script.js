@@ -1,4 +1,3 @@
-const reset = document.getElementById('reset');
 const save = document.getElementById('save');
 const toMenu = document.getElementById('toMenu')
 let getTitle = document.getElementById('noteTitle');
@@ -25,6 +24,7 @@ function addNewNote() {
         text: getText.value,
         color: getColor.value,
         date: formatDate,
+        checked: false
     }
     //dodanie obiektu Note do localstorage jako tekst wraz z indeksowanym kluczem
     localStorage.setItem(noteIndex++, JSON.stringify(Note));
@@ -47,18 +47,21 @@ for (let i = 0; i < localStorage.length; i++) {
     importatntNotesCheckBox.type = "checkbox";
 
     //funkcja przypinająca notatkę
-    importatntNotesCheckBox.onclick = function(){
+    importatntNotesCheckBox.onclick = function () {
         const importantsNotes = document.getElementById("important-notes");
         if (importatntNotesCheckBox.checked == true) {
             importantsNotes.appendChild(noteView);
+            addChecked(this);
         }
         else {
             noteStorageLayOut.appendChild(noteView);
+            removeChecked(this);
         }
     }
 
     //nadanie id dla noteView
-    noteView.id = "noteView";
+    // noteView.id = "noteView";
+    noteView.id = `noteView`;
     noteView.style.background = getNote.color;
 
     //nadanie id dla noteViewTitleAndDateHolder, który przechowuje w sobie noteViewTitle oraz noteVeiwDate
@@ -85,6 +88,8 @@ for (let i = 0; i < localStorage.length; i++) {
     //wczytanie daty utworzenia notatki do noteViewDate
     noteViewDate.innerHTML = getNote.date;
 
+    importatntNotesCheckBox.id = `check_${i}`;
+
     noteStorageLayOut.appendChild(noteView);
     noteView.appendChild(noteViewTitleAndDateHolder);
     noteViewTitleHolder.appendChild(noteViewTitle);
@@ -93,5 +98,41 @@ for (let i = 0; i < localStorage.length; i++) {
     noteViewTitleAndDateHolder.appendChild(noteViewTitleHolder);
     noteViewTitleAndDateHolder.appendChild(noteViewDateHolder);
     noteView.appendChild(noteViewText);
+
+    setState(importatntNotesCheckBox);
+
+    move(importatntNotesCheckBox, noteView);
 }
 
+
+function addChecked(element) {
+    var chid = element.id.split('_').pop();
+    // console.log(chid);
+    var json = JSON.parse(localStorage[chid]);
+    json.checked = true;
+    localStorage.setItem(chid, JSON.stringify(json));
+}
+
+function removeChecked(element) {
+    var chid = element.id.split('_').pop();
+    var json = JSON.parse(localStorage[chid]);
+    json.checked = false;
+    localStorage.setItem(chid, JSON.stringify(json));
+}
+
+function setState(element) {
+    var chid = element.id.split('_').pop();
+    var json = JSON.parse(localStorage[chid]);
+    if (json.checked == true) {
+        element.checked = true;
+        move(element.offsetParent);
+    }
+}
+
+
+function move(checkbox, element) {
+    if (checkbox.checked == true) {
+        const importantsNotes = document.getElementById("important-notes");
+        importantsNotes.appendChild(element);
+    }
+}
